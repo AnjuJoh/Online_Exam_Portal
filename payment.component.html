@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+
+<div class="col-md-12">
+    <div class="card card-container">
+        <form name="form" (ngSubmit)="paynow()" #f="ngForm" novalidate>
+            <div class="form-group">
+                <div class="alert alert-danger" role="alert" *ngIf="error">Payment failed: {{ error }}</div>
+                <div class="alert alert-success" role="alert" *ngIf="paymentId">Payment Success. Payment ID: {{ paymentId }}</div>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label> <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3" maxlength="20" #name="ngModel" />
+                <div class="alert-danger" *ngIf="f.submitted && name.invalid">
+                    <div *ngIf="name.errors">Name is required</div>
+                    <div *ngIf="name.errors">Name must be at least 3 characters</div>
+                    <div *ngIf="name.errors">Name must be at most 20 characters</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label> <input type="text" class="form-control" name="email" [(ngModel)]="form.email" required #email="ngModel" />
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && email.invalid">Email is required!</div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label> <input type="number" class="form-control" name="phone" [(ngModel)]="form.phone" required minlength="10" maxlength="10"
+                    #phone="ngModel" />
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && phone.invalid">
+                    <div *ngIf="phone.errors">Phone is required</div>
+                    <div *ngIf="phone.errors|| phone.errors">Phone must be 10 digits</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label> <input type="number" class="form-control" name="amount" [(ngModel)]="form.amount" required #amount="ngModel" />
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && amount.invalid">
+                    <div *ngIf="amount.errors">Amount is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">Pay</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</body>
+</html>
+<!-- <html>
+    <body>
+<div class="container my-3">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card shadow ">
+                <div class="card-body">
+                <h6>Basic Details</h6>
+                    <hr>
+                    <div class="row checkoutform">
+                        <div class="col-md-6">
+                        <label>First name</label>
+                        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required  #name="ngModel" placeholder="Enter First Name">
+                        </div>
+                        <div class="col-md-6">
+                        <label>Last name</label>
+                        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required  #name="ngModel" placeholder="Enter Last Name">
+                        </div>
+                        <div class="col-md-6 mt-2">
+                        <label>Email</label>
+                        <input type="text"  class="form-control" name="email" [(ngModel)]="form.email" required #email="ngModel" placeholder="Enter Email">
+                        </div>
+                        <div class="col-md-6 mt-2">
+                        <label>Mobile </label>
+                        <input type="text" class="form-control" name="phone" [(ngModel)]="form.phone" required #phone="ngModel" placeholder="Enter Mobile Number">
+                        </div>
+                        <div class="col-md-12 mt-2">
+                        <label>Address</label>
+                            <textarea required class="form-control" name="address" [(ngModel)]="form.amount" required #amount="ngModel" placeholder="Enter Amount"></textarea>
+                        </div>
+                        
+                    </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+    </body>
+</html> -->
+<!-- <html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+<section class="pricing-section">
+    <div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-xl-5 col-lg-6 col-md-8">
+				<div class="section-title text-center title-ex1">
+					<h2>Paid Plans</h2>
+					<p>Inventore cillum soluta inceptos eos platea, soluta class laoreet repellendus imperdiet optio.</p>
+				</div>
+			</div>
+		</div>
+		
+       
+            
+        <div class="container">
+         
+          
+		<div class="row">
+			<div class="col-md-4 ">
+				<div class="price-card ">
+       
+					<h2>Basic</h2>
+					<p>Free</p>
+					<p class="price"><span>0</span>/ Month</p>
+					<ul class="pricing-offers">
+						<li>Unlimited exams</li>
+						
+					</ul>
+					<a class="btn btn-primary btn-mid">Free</a>
+                    
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="price-card featured">
+					<h2>Pro</h2>
+					<p>Most popular choice</p>
+					<p class="price"><span>350</span>/ Month</p>
+					<ul class="pricing-offers">
+						<li>Unlimited exams</li>
+						<li>Unlimted attempts</li>
+						<li>Providing Study materials</li>
+						<li>Eye tracking</li>
+						<li>Highly secure</li>
+					</ul>
+					<button type="submit" class="btn btn-primary btn-mid">Purchase</button>
+				</div>
+			</div>
+			
+		</div>
+    
+	</div>
+
+</div>
+   
+</section>
+</body>
+</html> -->
+
